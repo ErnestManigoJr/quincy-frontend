@@ -58,6 +58,33 @@ function App() {
 
       <h3>Response:</h3>
       <pre>{response}</pre>
+
+      <h3>3. Render Song Output</h3>
+      <input
+        type="text"
+        placeholder="Enter filename (e.g., mytrack.wav)"
+        value={renderFile}
+        onChange={(e) => setRenderFile(e.target.value)}
+      />
+      <br />
+      <button onClick={async () => {
+        try {
+          const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/render`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ filename: renderFile })
+          });
+          const data = await res.json();
+          setRenderResult(data.output || 'Render failed');
+        } catch (err) {
+          console.error(err);
+          setRenderResult('Render error');
+        }
+      }}>Render Song</button>
+
+      <h4>Render Output:</h4>
+      <pre>{renderResult}</pre>
+
     </div>
   );
 }
