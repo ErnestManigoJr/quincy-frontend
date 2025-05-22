@@ -4,6 +4,8 @@ function App() {
   const [file, setFile] = useState(null);
   const [lyrics, setLyrics] = useState('');
   const [response, setResponse] = useState('');
+  const [renderFile, setRenderFile] = useState('');
+  const [renderResult, setRenderResult] = useState('');
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
